@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
-    price = models.DecimalField()
+    price = models.IntegerField()
     category = models.ManyToManyField(Category)
     created_by = models.ForeignKey(User)
     is_active = models.BooleanField(default=True)
@@ -40,7 +40,7 @@ class Image(models.Model):
 
 class Coupon(models.Model):
     code = models.CharField(max_length=50)
-    amount = models.DecimalField()
+    amount = models.IntegerField()
     is_active = models.BooleanField(default=True)
     created_date = models.DateField(auto_now_add=True)
     last_update = models.DateField(auto_now=True)
@@ -81,7 +81,7 @@ class Shipping(models.Model):
         )
     )
     address = models.ForeignKey(Address)
-    price = models.DecimalField()
+    price = models.IntegerField()
     state = models.ForeignKey(ShippingState)
 
 
@@ -90,7 +90,7 @@ class CreditCard(models.Model):
     cc_num = models.CharField(max_length=50)
     holder_name = models.CharField(max_length=50)
     expire_date = models.DateField()
-    is_active = models.DateField(default=True)
+    is_active = models.BooleanField(default=True)
     created_date = models.DateField(auto_now_add=True)
     last_update = models.DateField(auto_now=True)
 
@@ -105,7 +105,7 @@ class PaymentState(models.Model):
 
 class Payment(models.Model):
     creditCard = models.ForeignKey(CreditCard)
-    amount = models.DecimalField()
+    amount = models.IntegerField()
     state = models.ForeignKey(PaymentState)
     created_date = models.DateField(auto_now_add=True)
 
